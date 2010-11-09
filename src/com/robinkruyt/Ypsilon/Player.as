@@ -74,21 +74,18 @@ package com.robinkruyt.Ypsilon
 				
 				switch(Menu.selected)
 				{
-					case 0:
-						
-						break;
-					case 1:
+					case 2:
 						if(o.getTile(position.x,position.y) != 0)
 						{
 							o.setTile(position.x,position.y,0);
 						}
 						break;
-					case 2:
 					case 3:
 					case 4:
+					case 5:
 						if(o.getTile(position.x,position.y) == 0)
 						{
-							o.setTile(position.x,position.y,Menu.selected-1); // Toolset met blocks corrigeren
+							o.setTile(position.x,position.y,Menu.selected-2); // Toolset met blocks corrigeren
 						}
 						break;
 				}

@@ -16,10 +16,10 @@ package com.robinkruyt.Ypsilon
 		[Embed(source = 'assets/sprites/blocks.png')] 
 		private var ImgTiles:Class;
 		
-		private const mapSize:Point		= new Point(100,100);
-		private const BLOCKSIZE:uint	= 16;
-		private const AMOUNTBLOCKS:int	= 3; // 0 based
-		private const AIRBLOCKS:int		= 2; // Amount of blocks to convert to air (There is more air than blocks in the world)
+		private const mapSize:FlxPoint	= MapController.mapSize;
+		private const BLOCKSIZE:uint	= MapController.BLOCKSIZE;
+		private const AMOUNTBLOCKS:int	= MapController.AMOUNTBLOCKS; // 0 based
+		private const AIRBLOCKS:int		= MapController.AIRBLOCKS; // Amount of blocks to convert to air (There is more air than blocks in the world)
 		
 		
 		public function Map(X:int = 0, Y:int = 0)
@@ -48,10 +48,6 @@ package com.robinkruyt.Ypsilon
 			}else{
 				loadMap(generateMap(), ImgTiles,BLOCKSIZE);
 			}
-			
-			//loadMap(generateMap(), ImgTiles,BLOCKSIZE);
-			
-			FlxG.log("jeej");
 			
 		}
 		

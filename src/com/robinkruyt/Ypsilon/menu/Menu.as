@@ -5,14 +5,17 @@ package com.robinkruyt.Ypsilon.menu
 	public class Menu extends FlxGroup
 	{
 		/*
-			0	=	niks
-			1	=	pick
-			2	=	zand
-			3	=	gras
-			4	=	steen
+			0	=	selector
+			1	=	niks
+			2	=	pick
+			3	=	zand
+			4	=	gras
+			5	=	steen
 		*/
-		private static var _slots:Array = new Array(1,2,0,0,0);
-		private static var _selected:int = 0;
+		private static var _slots:Array = new Array(2,3,4,5,1);
+		private static var _selected:int = 1;
+		
+		private static var selector:MenuItem = new MenuItem(160,10,0);
 
 		
 		public function Menu()
@@ -23,8 +26,9 @@ package com.robinkruyt.Ypsilon.menu
 			{
 				var slot:MenuItem = new MenuItem(160+(i*21),10,_slots[i]);
 				add(slot);
-				
 			}
+			
+			add(selector);
 			
 		}
 
@@ -36,16 +40,18 @@ package com.robinkruyt.Ypsilon.menu
 		public static function set selected(value:int):void
 		{
 			_selected = value;
+			FlxG.log("test");
+			selector.x = 160+((_selected-1)*21);
 		}
 
 		public override function update():void{
 			super.update();
 			
-			if(FlxG.keys.ONE)		{ _selected = 1; }
-			else if(FlxG.keys.TWO)	{ _selected = 2; }
-			else if(FlxG.keys.THREE){ _selected = 3; }
-			else if(FlxG.keys.FOUR)	{ _selected = 4; }
-			else if(FlxG.keys.FIVE)	{ _selected = 5; }
+			if(FlxG.keys.ONE)		{ selected = 1; }
+			else if(FlxG.keys.TWO)	{ selected = 2; }
+			else if(FlxG.keys.THREE){ selected = 3; }
+			else if(FlxG.keys.FOUR)	{ selected = 4; }
+			else if(FlxG.keys.FIVE)	{ selected = 5; }
 			
 			
 		}
