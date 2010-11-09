@@ -1,5 +1,9 @@
 package com.robinkruyt.Ypsilon
 {
+	import com.robinkruyt.Ypsilon.menu.*;
+	
+	import flash.geom.Point;
+	
 	import org.flixel.*;
 	
 	public class Player extends FlxSprite
@@ -11,6 +15,8 @@ package com.robinkruyt.Ypsilon
 		private var _jumpPower:int = 800;
 		private var _attackCounter:int = 0;
 		private var counter:int = 0;
+		
+		private var _inventory:Array = new Array();
 		
 		public function Player(X:Number=0, Y:Number=0, SimpleGraphic:Class=null)
 		{
@@ -57,7 +63,36 @@ package com.robinkruyt.Ypsilon
 				counter = 0;
 			}
 			
-			
+			if(FlxG.mouse.pressed() && _attackCounter <= 0)
+			{
+				_attackCounter = 1;
+				
+				var chunkPos:FlxPoint = MapController.getCoordinates(FlxG.mouse.x, FlxG.mouse.y).relChunk
+				var o:Map = PlayState.lyrBlocks.getObjectByLocation(chunkPos.x, chunkPos.y) as Map;
+				var position:FlxPoint = MapController.getCoordinates(FlxG.mouse.x, FlxG.mouse.y).relBlock;
+				
+				
+				switch(Menu.selected)
+				{
+					case 0:
+						
+						break;
+					case 1:
+						if(o.getTile(position.x,position.y) != 0)
+						{
+							o.setTile(position.x,position.y,0);
+						}
+						break;
+					case 2:
+					case 3:
+					case 4:
+						if(o.getTile(position.x,position.y) == 0)
+						{
+							o.setTile(position.x,position.y,Menu.selected-1); // Toolset met blocks corrigeren
+						}
+						break;
+				}
+			}  
 			
 			//Movement
 			if (FlxG.keys.LEFT)

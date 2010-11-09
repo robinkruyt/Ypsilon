@@ -21,7 +21,7 @@ package com.robinkruyt.Ypsilon
 			add(title);
 	
 			var introText:FlxText;
-			introText = new FlxText(0, 64, FlxG.width, "Well hello there Absaloth!\nYou know the drill: \nX for jumping. The rest is is up to your mouse.");
+			introText = new FlxText(0, 64, FlxG.width, "Well hello there Absaloth!\nYou know the drill: \nX for jumping.\nArrows for walking. The rest is is up to your mouse.");
 			introText.setFormat (null, 8, 0xFF000000, "center");
 			add(introText);		
 			

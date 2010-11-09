@@ -9,6 +9,7 @@ package com.robinkruyt.Ypsilon
 	import flash.geom.Rectangle;
 	
 	import org.flixel.*;
+	import org.osmf.net.StreamingURLResource;
 	
 	public class Map extends FlxTilemap
 	{
@@ -20,20 +21,38 @@ package com.robinkruyt.Ypsilon
 		private const AMOUNTBLOCKS:int	= 3; // 0 based
 		private const AIRBLOCKS:int		= 2; // Amount of blocks to convert to air (There is more air than blocks in the world)
 		
-		private var _init:Boolean = false;
 		
-		public function Map(X:int = 0, Y:int = 0, init:Boolean = false)
+		public function Map(X:int = 0, Y:int = 0)
 		{
 			super();
 			
 			x = X*(mapSize.x*BLOCKSIZE);
 			y = Y*(mapSize.y*BLOCKSIZE);	
 			
-			_init = init;
+			PlayState.maps.push({x:X,y:Y,link:this});
+
 			
-			if(_init){ loadMap(generateMap(), ImgTiles,BLOCKSIZE); }
+			if(Y < 0) //Bovengronds
+			{
+				var mapStr:String = "";
+				for(var X:int = 0; X < mapSize.x; X++)
+				{
+					for(var Y:int = 0; Y < mapSize.y; Y++)
+					{
+						mapStr += "0,";
+					}
+					mapStr += "\n";
+				}
+				
+				loadMap(mapStr, ImgTiles,BLOCKSIZE);
+			}else{
+				loadMap(generateMap(), ImgTiles,BLOCKSIZE);
+			}
 			
-			PlayState.maps.push({x:X,y:Y});
+			//loadMap(generateMap(), ImgTiles,BLOCKSIZE);
+			
+			FlxG.log("jeej");
+			
 		}
 		
 		public function generateMap():String
@@ -109,29 +128,18 @@ package com.robinkruyt.Ypsilon
 		}
 		
 		public override function update():void{
-			if(_init){
-				super.update();
-				
-				if(onScreen())
-				{
-					visible = true;
-				}else{
-					visible = false;
-				}
+			super.update();
+			
+			if(onScreen())
+			{
+				visible = true;
+			}else{
+				visible = false;
 			}
+			
 		}
 		
-		public function getCoordinates(X:int,Y:int):Object{
-			
-			var coordinates:Object = new Object();
-			coordinates.block = new Point(Math.floor(X/16), Math.floor(Y/16)); // Position of underlying block
-			coordinates.chunk = new Point(Math.floor(coordinates.block.x/mapSize.x), Math.floor(coordinates.block.y/mapSize.y)); // Position of underlying Tilemap
-			
-			coordinates.sector = new Point(Math.floor(((coordinates.block.x-(coordinates.chunk.x*mapSize.x))*3)/mapSize.x), Math.floor(((coordinates.block.y-(coordinates.chunk.y*mapSize.y))*3)/mapSize.y));
-			
-			
-			return coordinates;
-		}
+		
 		
 	}
 }
