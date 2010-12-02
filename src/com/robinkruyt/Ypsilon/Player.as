@@ -77,6 +77,7 @@ package com.robinkruyt.Ypsilon
 					case 2:
 						if(o.getTile(position.x,position.y) != 0)
 						{
+							//_inventory.push(o.getTile(position.x,position.y));
 							o.setTile(position.x,position.y,0);
 						}
 						break;

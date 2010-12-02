@@ -25,7 +25,6 @@ package com.robinkruyt.Ypsilon
 		public function Map(X:int = 0, Y:int = 0)
 		{
 			super();
-			
 			x = X*(mapSize.x*BLOCKSIZE);
 			y = Y*(mapSize.y*BLOCKSIZE);	
 			

@@ -12,7 +12,7 @@ package com.robinkruyt.Ypsilon.menu
 			4	=	gras
 			5	=	steen
 		*/
-		private static var _slots:Array = new Array(2,3,4,5,1);
+		private static var _slots:Array = new Array({id:2, amount:1},{id:3, amount:1},{id:4, amount:1},{id:5, amount:1},{id:1, amount:1});
 		private static var _selected:int = 1;
 		
 		private static var selector:MenuItem = new MenuItem(160,10,0);
@@ -24,7 +24,7 @@ package com.robinkruyt.Ypsilon.menu
 
 			for(var i:int = 0; i<_slots.length;i++)
 			{
-				var slot:MenuItem = new MenuItem(160+(i*21),10,_slots[i]);
+				var slot:MenuItem = new MenuItem(160+(i*21),10,_slots[i].id);
 				add(slot);
 			}
 			
@@ -34,13 +34,12 @@ package com.robinkruyt.Ypsilon.menu
 
 		public static function get selected():int
 		{
-			return _slots[_selected-1]; // -1 is om de array te corrigeren
+			return _slots[_selected-1].id; // -1 is om de array te corrigeren
 		}
 
 		public static function set selected(value:int):void
 		{
 			_selected = value;
-			FlxG.log("test");
 			selector.x = 160+((_selected-1)*21);
 		}
 
